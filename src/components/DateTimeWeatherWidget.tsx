@@ -14,7 +14,7 @@ export function DateTimeWeatherWidget() {
   const dateString = date.toLocaleDateString('pl-PL', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
 
   return (
-    <Card shadow="sm" padding="md" radius="md" withBorder style={{ backgroundColor: 'var(--bg3)', border: 'var(--border)', marginBottom: '1rem' }}>
+    <Card shadow="sm" padding="md" radius="md" withBorder style={{ backgroundColor: 'var(--bg3)', border: 'var(--border)', height: '100%' }}>
       <Group justify="space-between" align="center">
         <Group>
           <Box style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: 'var(--bg1)', padding: '0.5rem', borderRadius: '50%' }}>
