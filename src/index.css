@@ -1,0 +1,48 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap");
+@import '@mantine/core/styles.css';
+@import '@mantine/charts/styles.css';
+
+body, html, * {
+font-family: "Manrope", system-ui, sans-serif;
+box-sizing: border-box;
+}
+
+:root {
+  --bg1: #06080d;
+  --bg2: #0e131c;
+  --bg3: #0b1018;
+  --color: #e7ecf3;
+  --border: 1px solid rgba(255, 255, 255, 0.08);
+  --border2: 2px solid rgba(255, 255, 255, 0.08);
+  --divider-color: #98a2b8;
+  --divider2: #c4cdd9;
+  --mcolor: #38d6ee;
+  --gradient: linear-gradient(135deg, #22d3ee, #3b82f6);
+  --button-active: rgba(56, 214, 238, 0.1);
+  --button-hover: rgba(255, 255, 255, 0.05);
+  --note-bg: rgba(56, 214, 238, 0.06);
+  --note-border: 1px solid rgba(56, 214, 238, 0.18);
+}
+
+html {
+  color-scheme: normal !important;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  background: transparent !important;
+  color: var(--color);
+  user-select: none;
+}
+
+#root {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}

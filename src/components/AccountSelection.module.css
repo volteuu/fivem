@@ -1,0 +1,22 @@
+.cardButton {
+  display: block;
+  width: 100%;
+  border-radius: var(--mantine-radius-md);
+  transition: transform 150ms ease, box-shadow 150ms ease;
+}
+
+.cardButton:hover {
+  transform: translateY(-5px);
+}
+
+.card {
+  background-color: var(--bg2);
+  border: var(--border);
+  height: 100%;
+  transition: background-color 150ms ease, border-color 150ms ease;
+}
+
+.cardButton:hover .card {
+  background-color: var(--button-hover);
+  border-color: rgba(56, 214, 238, 0.3);
+}
