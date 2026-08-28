@@ -10,7 +10,8 @@ import { Withdraw } from './Withdraw';
 import { Transfer } from './Transfer';
 import { History } from './History';
 import { DateTimeWeatherWidget } from './DateTimeWeatherWidget';
-import { PoliceBanner } from './PoliceBanner';
+import { AdBanner } from './AdBanner';
+import { EventWidget } from './EventWidget';
 
 interface BankMainProps {
   account: Account;
@@ -84,7 +85,14 @@ export function BankMain({ account, onLogout }: BankMainProps) {
           <Grid>
             <Grid.Col span={{ base: 12, md: 8 }}>
               <Stack>
-                <DateTimeWeatherWidget />
+                <Grid>
+                  <Grid.Col span={6}>
+                    <DateTimeWeatherWidget />
+                  </Grid.Col>
+                  <Grid.Col span={6}>
+                    <EventWidget />
+                  </Grid.Col>
+                </Grid>
 
                 <Card shadow="sm" padding="lg" radius="md" withBorder className={classes.mainCard}>
                   <Group justify="space-between" mb="md">
@@ -174,14 +182,14 @@ export function BankMain({ account, onLogout }: BankMainProps) {
                 </Stack>
               </ScrollArea>
 
-              <PoliceBanner />
+              <AdBanner />
             </Card>
           </Grid.Col>
         </Grid>
         )}
 
-        {activeTab === 'deposit' && <Deposit />}
-        {activeTab === 'withdraw' && <Withdraw />}
+        {activeTab === 'deposit' && <Deposit account={account} />}
+        {activeTab === 'withdraw' && <Withdraw account={account} />}
         {activeTab === 'transfer' && <Transfer />}
         {activeTab === 'history' && <History account={account} />}
       </AppShell.Main>
