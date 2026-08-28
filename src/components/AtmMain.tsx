@@ -77,6 +77,19 @@ export function AtmMain({ account, onLogout }: AtmMainProps) {
                       </Button>
                     </Grid.Col>
                   </Grid>
+
+                  <Group mt="xl" grow w="100%">
+                    <Button variant="light" color="gray" size="md" disabled>
+                      Doładowanie telefonu
+                    </Button>
+                    <Button variant="light" color="gray" size="md" disabled>
+                      Wypłata BLIK
+                    </Button>
+                  </Group>
+
+                  <Text size="xs" c="red" fw={500} mt="lg" ta="center">
+                    ⚠️ Pamiętaj o zasłanianiu klawiatury podczas wpisywania numeru PIN!
+                  </Text>
                 </Stack>
               )}
 
