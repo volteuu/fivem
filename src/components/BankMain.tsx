@@ -9,6 +9,8 @@ import { Deposit } from './Deposit';
 import { Withdraw } from './Withdraw';
 import { Transfer } from './Transfer';
 import { History } from './History';
+import { DateTimeWeatherWidget } from './DateTimeWeatherWidget';
+import { PoliceBanner } from './PoliceBanner';
 
 interface BankMainProps {
   account: Account;
@@ -82,6 +84,8 @@ export function BankMain({ account, onLogout }: BankMainProps) {
           <Grid>
             <Grid.Col span={{ base: 12, md: 8 }}>
               <Stack>
+                <DateTimeWeatherWidget />
+
                 <Card shadow="sm" padding="lg" radius="md" withBorder className={classes.mainCard}>
                   <Group justify="space-between" mb="md">
                   <Box>
@@ -169,6 +173,8 @@ export function BankMain({ account, onLogout }: BankMainProps) {
                   )}
                 </Stack>
               </ScrollArea>
+
+              <PoliceBanner />
             </Card>
           </Grid.Col>
         </Grid>
