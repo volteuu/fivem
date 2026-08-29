@@ -16,11 +16,11 @@ function App() {
   return (
     <>
       <div style={{
-        width: '70vw',
+        width: '80vw',
         height: '60vh',
         backgroundColor: 'var(--bg1)',
         borderRadius: 'var(--mantine-radius-md)',
-        overflow: 'hidden',
+        overflow: 'auto',
         position: 'relative',
         boxShadow: '0 0 20px rgba(0, 0, 0, 0.5)'
       }}>
