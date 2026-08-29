@@ -9,6 +9,7 @@ import { History } from './History';
 import { DateTimeWeatherWidget } from './DateTimeWeatherWidget';
 import { AdBanner } from './AdBanner';
 import { EventWidget } from './EventWidget';
+import { AccountsView } from './AccountsView';
 
 interface BankMainProps {
   account: Account;
@@ -17,7 +18,7 @@ interface BankMainProps {
 
 export function BankMain({ account, onLogout }: BankMainProps) {
   const [opened, { toggle }] = useDisclosure();
-  const [activeTab, setActiveTab] = useState<'main' | 'history'>('main');
+  const [activeTab, setActiveTab] = useState<'main' | 'history' | 'accounts'>('main');
   const [quickAction, setQuickAction] = useState<'withdraw' | 'deposit' | 'transfer'>('withdraw');
   const [quickAmount, setQuickAmount] = useState<number | string>('');
 
@@ -68,6 +69,7 @@ export function BankMain({ account, onLogout }: BankMainProps) {
         <Stack gap="sm">
           <NavLink label="Dashboard" leftSection={<IconBuildingBank size={20} />} active={activeTab === 'main'} onClick={() => setActiveTab('main')} className={classes.navLink} />
           <NavLink label="Transakcje" leftSection={<IconHistory size={20} />} active={activeTab === 'history'} onClick={() => setActiveTab('history')} className={classes.navLink} />
+          <NavLink label="Konta" leftSection={<IconBuildingBank size={20} />} active={activeTab === 'accounts'} onClick={() => setActiveTab('accounts')} className={classes.navLink} />
         </Stack>
       </AppShell.Navbar>
 
@@ -251,6 +253,12 @@ export function BankMain({ account, onLogout }: BankMainProps) {
         )}
 
         {activeTab === 'history' && <History account={account} />}
+
+        {activeTab === 'accounts' && (
+          <Box p="lg">
+            <AccountsView currentAccount={account} />
+          </Box>
+        )}
       </AppShell.Main>
     </AppShell>
   );
