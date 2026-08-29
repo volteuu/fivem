@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { Title, Text, Button, Stack, Group, Card, Badge, Box, CopyButton, ActionIcon, Grid, Modal, TextInput, Table } from '@mantine/core';
 import { IconCopy, IconCheck, IconPlus, IconSettings, IconUsers, IconTrash, IconPencil, IconExchange, IconShieldLock } from '@tabler/icons-react';
-import { Account, DUMMY_ACCOUNTS } from '../types';
+import { DUMMY_ACCOUNTS } from '../types';
+import type { Account } from '../types';
 import { ManageUsersView } from './ManageUsersView';
 import { ScrollArea } from '@mantine/core';
 

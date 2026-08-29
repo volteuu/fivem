@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Title, Text, Button, Stack, Group, Card, TextInput, Avatar, Box, ActionIcon, Menu, MultiSelect } from '@mantine/core';
 import { IconSearch, IconPlus, IconSettings, IconTrash, IconUserPlus } from '@tabler/icons-react';
-import { Account, SharedUser, Permission } from '../types';
+import type { Account, SharedUser, Permission } from '../types';
 
 interface ManageUsersViewProps {
   account: Account;

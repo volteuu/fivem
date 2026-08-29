@@ -3,7 +3,8 @@ import { AccountSelection } from './components/AccountSelection';
 import { BankMain } from './components/BankMain';
 import { AtmMain } from './components/AtmMain';
 import { DebugTool } from './components/DebugTool';
-import { type Account, DUMMY_ACCOUNTS } from './types';
+import { DUMMY_ACCOUNTS } from './types';
+import type { Account } from './types';
 
 function App() {
   const [selectedAccount, setSelectedAccount] = useState<Account | null>(null);
