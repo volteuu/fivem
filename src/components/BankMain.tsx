@@ -85,12 +85,16 @@ export function BankMain({ account, onLogout }: BankMainProps) {
           <Grid>
             <Grid.Col span={{ base: 12, md: 8 }}>
               <Stack>
-                <Grid>
-                  <Grid.Col span={6}>
-                    <DateTimeWeatherWidget />
+                <Grid align="stretch">
+                  <Grid.Col span={6} style={{ display: 'flex', flexDirection: 'column' }}>
+                    <Box style={{ flex: 1 }}>
+                      <DateTimeWeatherWidget />
+                    </Box>
                   </Grid.Col>
-                  <Grid.Col span={6}>
-                    <EventWidget />
+                  <Grid.Col span={6} style={{ display: 'flex', flexDirection: 'column' }}>
+                    <Box style={{ flex: 1 }}>
+                      <EventWidget />
+                    </Box>
                   </Grid.Col>
                 </Grid>
 
