@@ -1,13 +1,10 @@
 import { useState } from 'react';
-import { AppShell, Burger, Group, NavLink, Title, Text, Card, Grid, Stack, Badge, Box, Button, ScrollArea, Divider } from '@mantine/core';
+import { AppShell, Burger, Group, NavLink, Title, Text, Card, Grid, Stack, Badge, Box, Button, ScrollArea, Divider, TextInput, NumberInput, ThemeIcon } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { IconArrowDownLeft, IconArrowUpRight, IconBuildingBank, IconHistory, IconLogout, IconSend, IconCreditCard, IconPigMoney } from '@tabler/icons-react';
 import { AreaChart } from '@mantine/charts';
 import type { Account, Transaction } from '../types';
 import classes from './BankMain.module.css';
-import { Deposit } from './Deposit';
-import { Withdraw } from './Withdraw';
-import { Transfer } from './Transfer';
 import { History } from './History';
 import { DateTimeWeatherWidget } from './DateTimeWeatherWidget';
 import { AdBanner } from './AdBanner';
@@ -20,7 +17,9 @@ interface BankMainProps {
 
 export function BankMain({ account, onLogout }: BankMainProps) {
   const [opened, { toggle }] = useDisclosure();
-  const [activeTab, setActiveTab] = useState<'main' | 'deposit' | 'withdraw' | 'transfer' | 'history'>('main');
+  const [activeTab, setActiveTab] = useState<'main' | 'history'>('main');
+  const [quickAction, setQuickAction] = useState<'withdraw' | 'deposit' | 'transfer'>('withdraw');
+  const [quickAmount, setQuickAmount] = useState<number | string>('');
 
   const getTransactionIcon = (type: Transaction['type']) => {
     switch (type) {
@@ -67,16 +66,8 @@ export function BankMain({ account, onLogout }: BankMainProps) {
 
       <AppShell.Navbar p="md" style={{ backgroundColor: 'var(--bg3)', borderRight: 'var(--border)', position: 'absolute' }}>
         <Stack gap="sm">
-          <Text size="xs" fw={500} c="dimmed" tt="uppercase">Operacje</Text>
-          <NavLink label="Pulpit" leftSection={<IconBuildingBank size={20} />} active={activeTab === 'main'} onClick={() => setActiveTab('main')} className={classes.navLink} />
-          <NavLink label="Wpłać" leftSection={<IconArrowDownLeft size={20} />} active={activeTab === 'deposit'} onClick={() => setActiveTab('deposit')} className={classes.navLink} />
-          <NavLink label="Wypłać" leftSection={<IconArrowUpRight size={20} />} active={activeTab === 'withdraw'} onClick={() => setActiveTab('withdraw')} className={classes.navLink} />
-          <NavLink label="Przelewy" leftSection={<IconSend size={20} />} active={activeTab === 'transfer'} onClick={() => setActiveTab('transfer')} className={classes.navLink} />
-
-          <Divider my="sm" color="var(--border)" />
-
-          <Text size="xs" fw={500} c="dimmed" tt="uppercase">Historia</Text>
-          <NavLink label="Historia operacji" leftSection={<IconHistory size={20} />} active={activeTab === 'history'} onClick={() => setActiveTab('history')} className={classes.navLink} />
+          <NavLink label="Dashboard" leftSection={<IconBuildingBank size={20} />} active={activeTab === 'main'} onClick={() => setActiveTab('main')} className={classes.navLink} />
+          <NavLink label="Transakcje" leftSection={<IconHistory size={20} />} active={activeTab === 'history'} onClick={() => setActiveTab('history')} className={classes.navLink} />
         </Stack>
       </AppShell.Navbar>
 
@@ -155,6 +146,73 @@ export function BankMain({ account, onLogout }: BankMainProps) {
                   />
                 </Box>
               </Card>
+
+              <Card shadow="sm" padding="lg" radius="md" withBorder className={classes.mainCard}>
+                <Group justify="space-between" mb="lg">
+                  <Group>
+                    <ThemeIcon color="green" variant="light" size="lg">
+                      <IconPigMoney size={20} />
+                    </ThemeIcon>
+                    <Title order={5}>Szybkie akcje</Title>
+                  </Group>
+                  <Group gap={0}>
+                    <Button
+                      variant={quickAction === 'withdraw' ? 'filled' : 'light'}
+                      color="red"
+                      onClick={() => setQuickAction('withdraw')}
+                      style={{ borderTopRightRadius: 0, borderBottomRightRadius: 0 }}
+                    >
+                      Wypłać
+                    </Button>
+                    <Button
+                      variant={quickAction === 'deposit' ? 'filled' : 'light'}
+                      color="green"
+                      onClick={() => setQuickAction('deposit')}
+                      style={{ borderRadius: 0 }}
+                    >
+                      Wpłać
+                    </Button>
+                    <Button
+                      variant={quickAction === 'transfer' ? 'filled' : 'light'}
+                      color="blue"
+                      onClick={() => setQuickAction('transfer')}
+                      style={{ borderTopLeftRadius: 0, borderBottomLeftRadius: 0 }}
+                    >
+                      Przelej
+                    </Button>
+                  </Group>
+                </Group>
+
+                <Grid gutter="xs" mb="md">
+                  {[100, 500, 1000, 5000, 10000].map((val) => (
+                    <Grid.Col span={2.4} key={val}>
+                      <Button fullWidth variant="default" size="xs" onClick={() => setQuickAmount(val)}>
+                        $ {new Intl.NumberFormat('en-US').format(val)}
+                      </Button>
+                    </Grid.Col>
+                  ))}
+                </Grid>
+
+                <Stack gap="sm">
+                  <NumberInput
+                    label="Kwota"
+                    placeholder="Wpisz kwotę"
+                    value={quickAmount}
+                    onChange={setQuickAmount}
+                    min={0}
+                    hideControls
+                  />
+                  {quickAction === 'transfer' && (
+                    <TextInput
+                      label="ID Gracza / IBAN"
+                      placeholder="Wprowadź ID gracza / IBAN..."
+                    />
+                  )}
+                  <Button color="green" fullWidth mt="sm" disabled={!quickAmount || Number(quickAmount) <= 0}>
+                    Zatwierdź
+                  </Button>
+                </Stack>
+              </Card>
             </Stack>
           </Grid.Col>
 
@@ -192,9 +250,6 @@ export function BankMain({ account, onLogout }: BankMainProps) {
         </Grid>
         )}
 
-        {activeTab === 'deposit' && <Deposit account={account} />}
-        {activeTab === 'withdraw' && <Withdraw account={account} />}
-        {activeTab === 'transfer' && <Transfer />}
         {activeTab === 'history' && <History account={account} />}
       </AppShell.Main>
     </AppShell>

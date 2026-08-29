@@ -18,9 +18,9 @@ export function AdBanner() {
 
   const getBackground = () => {
     switch (slide) {
-      case 0: return 'linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%)';
-      case 1: return 'linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%)';
-      case 2: return 'linear-gradient(135deg, #ec4899 0%, #f472b6 100%)';
+      case 0: return 'linear-gradient(135deg, #172554 0%, #1e3a8a 100%)';
+      case 1: return 'linear-gradient(135deg, #451a03 0%, #78350f 100%)';
+      case 2: return 'linear-gradient(135deg, #4c0519 0%, #831843 100%)';
       default: return 'var(--bg2)';
     }
   };
